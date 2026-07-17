@@ -20,31 +20,6 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTextBrowser" name="textBrowser">
-     <property name="html">
-      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;title&gt;Краткое руководство&lt;/title&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;h1 align=&quot;center&quot; style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:xx-large; font-weight:700;&quot;&gt;Выбор режима отображения&lt;/span&gt; &lt;/h1&gt;
-&lt;h2 style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:700;&quot;&gt;Все&lt;/span&gt; &lt;/h2&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Показывает полный список вагонов. &lt;/p&gt;
-&lt;h2 style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:700;&quot;&gt;Требующие замены&lt;/span&gt; &lt;/h2&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Показывает вагоны, дата следующей замены которых просрочена больше чем на количиства дней указанных в настройках (по умолчанию зимай - 28, летом - 14) &lt;/p&gt;
-&lt;h2 style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:700;&quot;&gt;На дату&lt;/span&gt; &lt;/h2&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Показывает вагоны дата следующей замены которых выподает на конкретную дату. По умолчанию устанавливаетса дата на завтра. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;например: у вагона установлена дата следующей замены 01.07.2023, период установлен лето-14, тогда этот вагон будет появлятся в списке при выборе дат: 01.07.23, 15.07.23, 29.07.23, и т.д. &lt;/p&gt;
-&lt;h1 align=&quot;center&quot; style=&quot; margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:xx-large; font-weight:700;&quot;&gt;Основные операции&lt;/span&gt; &lt;/h1&gt;
-&lt;h2 style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:700;&quot;&gt;Добавить&lt;/span&gt; &lt;/h2&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Позволяет добавить новый вагон. Вызывается из меню &lt;span style=&quot; font-weight:700;&quot;&gt;правка-&amp;gt;добавить&lt;/span&gt; или горячими клавишами &lt;span style=&quot; font-weight:700;&quot;&gt;ctrl-n&lt;/span&gt;. Если вагон уже существует появится сообщение об ошибке. &lt;/p&gt;
-&lt;h2 style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:700;&quot;&gt;Изменить&lt;/span&gt; &lt;/h2&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Позволяет изменить данные о вагоне. Вызывается через меню &lt;span style=&quot; font-weight:700;&quot;&gt;правка-&amp;gt;изменить&lt;/span&gt; или горячими клавишами &lt;span style=&quot; font-weight:700;&quot;&gt;ctrl-e&lt;/span&gt;. &lt;/p&gt;
-&lt;h2 style=&quot; margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:700;&quot;&gt;Отметить&lt;/span&gt; &lt;/h2&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Позволяет отметить замену фильтров сегодняшним числом. Вызывается через меню &lt;span style=&quot; font-weight:700;&quot;&gt;правка-&amp;gt;отметить&lt;/span&gt;, горячими клавишами &lt;span style=&quot; font-weight:700;&quot;&gt;ctrl-m&lt;/span&gt;, нажатием клавиши &lt;span style=&quot; font-weight:700;&quot;&gt;Enter&lt;/span&gt; или &lt;span style=&quot; font-weight:700;&quot;&gt;двойным щелчком&lt;/span&gt; по нужной строке. Дата следующей замены вычисляется в зависимости от настроек, при необходимости эту дату можно откорректировать для более равномерного распределения вагонов. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;внимание&lt;/span&gt;: не путайте операции &lt;span style=&quot; font-weight:700;&quot;&gt;изменить&lt;/span&gt; и &lt;span style=&quot; font-weight:700;&quot;&gt;отметить&lt;/span&gt;. &lt;span style=&quot; font-weight:700;&quot;&gt;изменить&lt;/span&gt; используется для редактирования информации о вагоне, а &lt;span style=&quot; font-weight:700;&quot;&gt;отметить&lt;/span&gt; автоматически вычисляет дату замены. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
      <property name="source">
       <url>
        <string>qrc:/doc/resources/manual.html</string>
