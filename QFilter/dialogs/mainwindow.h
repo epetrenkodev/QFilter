@@ -1,7 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QBarSeries>
+#include <QBarSet>
+#include <QChart>
 #include <QMainWindow>
+
+using namespace QtCharts;
 
 QT_BEGIN_NAMESPACE
 
@@ -27,6 +32,9 @@ private:
   AbstractRepository *repository;
   WagonModel *model;
   int prevPosition;
+  QBarSet *wagons;
+  QChart *chart;
+  QBarSeries *series;
 
   int currentPosition();
   void setPosition(int position);
@@ -42,6 +50,7 @@ private slots:
   void setMode(bool);
   void copyToClipboard();
   void copyToClipboardAll();
+  void updateDiagram();
 };
 
 #endif // MAINWINDOW_H

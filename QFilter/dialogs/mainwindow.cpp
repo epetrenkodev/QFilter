@@ -6,11 +6,13 @@
 #include "models/wagonmodel.h"
 #include "settingdialog.h"
 #include "ui_mainwindow.h"
+#include <QBarCategoryAxis>
 #include <QClipboard>
 #include <QDebug>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
+#include <QValueAxis>
 
 MainWindow::MainWindow(AbstractRepository *repository, QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), repository(repository) {
   ui->setupUi(this);
@@ -32,6 +34,7 @@ MainWindow::MainWindow(AbstractRepository *repository, QWidget *parent) : QMainW
   connect(ui->actionRemove, &QAction::triggered, this, &MainWindow::removeCurrent);                             // Удалить
   connect(ui->actionCopy, &QAction::triggered, this, &MainWindow::copyToClipboard);
   connect(ui->actionCopyAll, &QAction::triggered, this, &MainWindow::copyToClipboardAll);
+  connect(ui->actionDiagram, &QAction::triggered, this, [=](bool checked) { ui->diagram->setVisible(checked); });
 
   int colCount = model->columnCount(QModelIndex());
   for (int i = 0; i < colCount; ++i) {
@@ -41,6 +44,8 @@ MainWindow::MainWindow(AbstractRepository *repository, QWidget *parent) : QMainW
     action->setData(i);
     connect(action, &QAction::triggered, this, [=](bool checed) { (checed) ? ui->tableView->showColumn(action->data().toInt()) : ui->tableView->hideColumn(action->data().toInt()); });
   }
+
+  ui->actionDiagram->setChecked(QSettings().value("Diagram", false).toBool());
 
   // filterComboBox
   connect(ui->filterComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(displayModeChanged(int)));
@@ -65,9 +70,46 @@ MainWindow::MainWindow(AbstractRepository *repository, QWidget *parent) : QMainW
   ui->tableView->setModel(model);
   ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
   for (int i = 0; i < model->columnCount(QModelIndex()); ++i) {
-    (QSettings().value("Columns/Column_" + QString::number(i), true).toBool()) ? ui->tableView->showColumn(i) : ui->tableView->hideColumn(i);
+      (QSettings().value("Columns/Column_" + QString::number(i), true).toBool()) ? ui->tableView->showColumn(i) : ui->tableView->hideColumn(i);
   }
   connect(ui->tableView, &QTableView::activated, ui->actionMark, &QAction::trigger);
+
+  // Diagram
+
+  wagons = new QBarSet("Вагоны");
+
+  for (int i = 0; i < 30; ++i) {
+      wagons->append(0);
+  }
+
+  series = new QBarSeries();
+  series->append(wagons);
+
+  chart = new QChart();
+  chart->addSeries(series);
+
+  QStringList categories;
+  QDateTime dateTime = QDateTime::currentDateTime();
+  for (int i = 0; i < 30; ++i)
+      categories.append(QString::number(dateTime.addDays(i).date().day()));
+
+  QBarCategoryAxis *axisX = new QBarCategoryAxis();
+  axisX->append(categories);
+  chart->addAxis(axisX, Qt::AlignBottom);
+  series->attachAxis(axisX);
+
+  QValueAxis *axisY = new QValueAxis();
+  axisY->setLabelFormat("%d");
+  chart->addAxis(axisY, Qt::AlignLeft);
+  series->attachAxis(axisY);
+
+  ui->diagram->setChart(chart);
+
+  connect(ui->filterComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateDiagram()));
+  connect(ui->winterRadioButton, SIGNAL(toggled(bool)), this, SLOT(updateDiagram()));
+  connect(repository, SIGNAL(dataUpdated()), this, SLOT(updateDiagram()));
+  ui->diagram->setVisible(ui->actionDiagram->isChecked());
+  updateDiagram();
 
   // search
   // connect(ui->searchEdit, &QLineEdit::textChanged, this, [=]() { model->setSearch(ui->searchEdit->text()); });
@@ -84,6 +126,8 @@ MainWindow::~MainWindow() {
   for (int i = 0; i < model->columnCount(QModelIndex()); ++i) {
     QSettings().setValue("Columns/Column_" + QString::number(i), !ui->tableView->isColumnHidden(i));
   }
+
+  QSettings().setValue("Diagram", ui->actionDiagram->isChecked());
 
   delete model;
   delete ui;
@@ -236,4 +280,20 @@ void MainWindow::copyToClipboardAll() {
     }
   }
   QApplication::clipboard()->setText(copyText);
+}
+
+void MainWindow::updateDiagram()
+{
+    QDateTime dateTime = QDateTime::currentDateTime();
+    for (int i = 0; i < 30; ++i) {
+        QDate date = dateTime.addDays(i).date();
+        int countOfDate = repository->getOnDate(date).count();
+        wagons->replace(i, countOfDate);
+    }
+
+    qreal maxVal = 0;
+    for (int i = 0; i < wagons->count(); ++i)
+        maxVal = qMax(maxVal, wagons->at(i));
+    QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).first());
+    axisY->setRange(0, maxVal);
 }
