@@ -69,6 +69,7 @@ MainWindow::MainWindow(AbstractRepository *repository, QWidget *parent) : QMainW
   ui->tableView->addAction(ui->actionRemove);
   ui->tableView->setModel(model);
   ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+  ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
   for (int i = 0; i < model->columnCount(QModelIndex()); ++i) {
       (QSettings().value("Columns/Column_" + QString::number(i), true).toBool()) ? ui->tableView->showColumn(i) : ui->tableView->hideColumn(i);
   }
