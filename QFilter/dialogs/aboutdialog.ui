@@ -34,9 +34,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="versoinLabel">
      <property name="text">
-      <string>QFilter 1.1.0</string>
+      <string>QFilter 0.0.0</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

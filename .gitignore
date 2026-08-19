@@ -2,3 +2,4 @@
 /work/
 *.pro.user
 *.pro.user.*
+**/*.desktop
