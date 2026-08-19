@@ -46,10 +46,13 @@ EditDialog::EditDialog(AbstractRepository *repository, Wagon wagon, Mode mode, Q
     break;
   case Mark:
     setWindowTitle("Отметить");
-    ui->wagonNumberEdit->setReadOnly(true);
-    ui->replacementDateEdit->setReadOnly(true);
+    ui->wagonNumberEdit->setEnabled(false);
+    ui->replacementDateEdit->setEnabled(false);
     ui->replacementDateEdit->setDate(QDate::currentDate());
     ui->nextReplacementDateEdit->setDate(nextDate());
+    ui->filterTypeComboBox->setEnabled(false);
+    ui->wagonTypeComboBox->setEnabled(false);
+    ui->surnameComboBox->setFocus();
     break;
   }
 }
